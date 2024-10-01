@@ -13,11 +13,14 @@
   <div id="weather-container">
     <input type="text" id="city-input" placeholder="Enter city name" />
     <button id="get-weather-btn">Get Weather</button>
-    <h3 id="city-name"></h3>
-    <p id="temperature"></p>
-    <p id="weather-description"></p>
+      <div id="weatherOutput">
+        <h3 id="city-name"></h3>
+        <img id="weatherIcon" alt="Weather Icon">
+        <p id="temp"></p>
+        <p id="weather-description"></p>
+      </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

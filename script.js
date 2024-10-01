@@ -1,3 +1,46 @@
+document.getElementById('get-weather-btn').addEventListener('click', getWeather);
+
+function getWeather() {
+    const apiKey = "527c07fe978146fb150a13dfb807a64b";
+    let cityName = document.getElementById('city-input').value;
+    const weatherOutput = document.getElementById('weatherOutput');
+    
+    if (!cityName){
+        alert('Please Enter a city');
+        return;
+    }
+
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&limit=1&appid=${apiKey}&units=imperial`;
+
+    // The elements that i want to update
+    const cityNameElement = document.getElementById('city-name');
+    const weatherIconElement = document.getElementById('weatherIcon');
+    const tempElement = document.getElementById("temp");
+    const descriptionElement = document.getElementById("weather-description");
+
+    fetch(apiUrl)
+        .then(response =>{
+            if (!response.ok) {
+                throw new Error('Network Reesponse Was Not Ok');
+            }
+            return response.json()
+        })
+        .then(data => {
+            const temperature = data.main.temp;
+            const picture = data.weather[0].id;
+            const city = data.name;
+            const description = data.weather[0].description;
+            cityNameElement.textContent = city; // Update the city name
+            tempElement.textContent = `Temperature: ${temperature}°C`; // Update the temperature
+            descriptionElement.textContent = `Weather: ${description}`; // Update the description
+            weatherIconElement.src = `http://openweathermap.org/img/wn/${iconCode}.png`; // Update the weather icon
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+}
+
 // Step 1: Set up an event listener for the button click
 // - Use "document.getElementById()" to target the button element
 // - Add an event listener that triggers when the button is clicked
