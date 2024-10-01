@@ -3,7 +3,7 @@ document.getElementById('get-weather-btn').addEventListener('click', getWeather)
 function getWeather() {
     const apiKey = "527c07fe978146fb150a13dfb807a64b";
     let cityName = document.getElementById('city-input').value;
-    const weatherOutput = document.getElementById('weatherOutput');
+    // const weatherOutput = document.getElementById('weatherOutput');
     
     if (!cityName){
         alert('Please Enter a city');
@@ -14,7 +14,7 @@ function getWeather() {
 
     // The elements that i want to update
     const cityNameElement = document.getElementById('city-name');
-    const weatherIconElement = document.getElementById('weatherIcon');
+    const weatherIconElement = document.getElementById('weather-Icon');
     const tempElement = document.getElementById("temp");
     const descriptionElement = document.getElementById("weather-description");
 
@@ -27,13 +27,13 @@ function getWeather() {
         })
         .then(data => {
             const temperature = data.main.temp;
-            const picture = data.weather[0].id;
+            const picture = data.weather[0].icon;
             const city = data.name;
             const description = data.weather[0].description;
             cityNameElement.textContent = city; // Update the city name
             tempElement.textContent = `Temperature: ${temperature}°C`; // Update the temperature
             descriptionElement.textContent = `Weather: ${description}`; // Update the description
-            weatherIconElement.src = `http://openweathermap.org/img/wn/${iconCode}.png`; // Update the weather icon
+            weatherIconElement.src = `http://openweathermap.org/img/wn/${picture}.png`; // Update the weather icon
         })
         .catch(error => {
             console.error('Error:', error);
